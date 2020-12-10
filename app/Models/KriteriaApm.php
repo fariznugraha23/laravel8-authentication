@@ -14,4 +14,8 @@ class KriteriaApm extends Model
     protected $fillable = [
         'nama_kriteria'
     ];
+    public function apm()
+    {
+        return $this->hasMany('App\Models\Apm', 'id_kriteria','id_kriteria');
+    }
 }

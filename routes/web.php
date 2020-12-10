@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Apms;
 use App\Http\Livewire\AreaApms;
 use App\Http\Livewire\KriteriaApms; //Load class AreaApm 
 
@@ -20,10 +21,10 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
-    Route::get('/dashboard', function() {
-        return view('dashboard');
-    })->name('dashboard');
-
+    // Route::get('/dashboard', function() {
+    //     return view('dashboard');
+    // })->name('dashboard');
+    Route::get('dashboard', Apms::class)->name('dashboard');
     Route::get('area-apms', AreaApms::class)->name('area-apms'); //Tambahkan routing ini
     Route::get('kriteria-apms', KriteriaApms::class)->name('kriteria-apms');
 });

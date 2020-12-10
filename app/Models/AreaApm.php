@@ -14,4 +14,8 @@ class AreaApm extends Model
     protected $fillable = [
         'nama_area'
     ];
+    public function apm()
+    {
+        return $this->hasMany('App\Models\Apm', 'id_area','id_area');
+    }
 }
