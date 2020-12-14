@@ -8,11 +8,11 @@ use App\Models\AreaApm;
 use App\Models\KriteriaApm;
 class Apms extends Component
 {
-    public $apm,$kriteria,$area, $id_area, $area_rb, $penilaian, $a, $b, $c, $nilai, $id_kriteria, $bobot, $skor, $panduan_eviden, $catatan_eviden;
+    public $apm, $id_apm, $kriteria,$area, $id_area, $area_rb, $penilaian, $a, $b, $c, $nilai, $id_kriteria, $bobot, $skor, $panduan_eviden, $catatan_eviden;
     public $isApm = 0;
     public function render()
     {
-        $this->apm = Apm::orderBy('id', 'ASC')->get();
+        $this->apm = Apm::orderBy('id_apm', 'ASC')->get();
         return view('dashboard');
     }
     public function create()
@@ -62,7 +62,8 @@ class Apms extends Component
             'panduan_eviden' => 'required',
             'catatan_eviden' => 'required'
         ]);
-        Apm::updateOrCreate(['id' => $this->id], [
+        
+        Apm::updateOrCreate(['id_apm' => $this->id_apm], [
             'id_area' => $this->id_area,
             'area_rb' => $this->area_rb,
             'penilaian' => $this->penilaian,
@@ -80,11 +81,13 @@ class Apms extends Component
         $this->closeApm(); 
         $this->resetFields(); 
     }
-    public function edit($id)
+    public function edit($id_apm)
     {
-        $apm = Apm::find($id); 
+        $apm = Apm::find($id_apm); 
+        $this->area = AreaApm::orderBy('id_area', 'ASC')->get();
+        $this->kriteria = KriteriaApm::orderBy('id_kriteria', 'ASC')->get();
        
-        $this->id = $id;
+        $this->id_apm = $id_apm;
         $this->id_area = $apm->id_area;
         $this->area_rb = $apm->area_rb;
         $this->penilaian = $apm->penilaian;
@@ -100,9 +103,16 @@ class Apms extends Component
 
         $this->openApm();
     }
-    public function delete($id)
+    public function upload($id_apm)
     {
-        $apm = Apm::find($id);
+        $apm = Apm::find($id_apm); 
+        $this->area = AreaApm::orderBy('id_area', 'ASC')->get();
+        $this->kriteria = KriteriaApm::orderBy('id_kriteria', 'ASC')->get();
+        return view('dashboard');
+    }
+    public function delete($id_apm)
+    {
+        $apm = Apm::find($id_apm);
         $apm->delete(); 
         session()->flash('message', 'Data Dihapus');
     }

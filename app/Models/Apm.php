@@ -10,7 +10,7 @@ class Apm extends Model
     use HasFactory;
     protected $table = "apms";
     public $timestamps = false;
-    protected $primaryKey = "id";
+    protected $primaryKey = "id_apm";
     protected $fillable = [
         'id_area', 'area_rb', 'penilaian', 'a', 'b', 'c', 'nilai', 'id_kriteria', 'bobot', 'skor', 'panduan_eviden', 'catatan_eviden'
     ];
