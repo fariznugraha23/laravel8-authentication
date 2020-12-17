@@ -17,7 +17,7 @@
 
         <div class="form-group">
             <label for="exampleInputName">Title:</label>
-            <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="exampleInputName" placeholder="Enter title" wire:model="title">
+            <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="exampleInputName" placeholder="$apm->id_apm" wire:model="title">
             @error('title') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
         <div class="form-group">

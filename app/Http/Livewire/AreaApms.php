@@ -3,15 +3,28 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 use App\Models\AreaApm;
 class AreaApms extends Component
 {
+    use WithPagination;
     public $area, $nama_area, $id_area;
     public $isArea = 0;
+    public $paginate=7;
+    public $search;
+    protected $queryString = ['search'];
+    public function mount()
+    {
+        $this->search = request()->query('search', $this->search);
+    }
     public function render()
     {
-        $this->area = AreaApm::orderBy('id_area', 'ASC')->get();
-        return view('livewire.area-apms');
+        // $this->area = AreaApm::orderBy('id_area', 'ASC')->paginate(5);
+        // return view('livewire.area-apms',['areas' => AreaApm::orderBy('id_area', 'ASC')->paginate($this->paginate)]);
+        return view('livewire.area-apms',[
+            'areas' => $this->search === null ?
+            AreaApm::orderBy('id_area', 'ASC')->paginate($this->paginate) :
+            AreaApm::orderBy('id_area', 'ASC')->where('nama_area','like','%'.$this->search.'%')->paginate($this->paginate)]);
     }
     public function create()
     {

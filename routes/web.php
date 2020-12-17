@@ -27,6 +27,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     // })->name('dashboard');
     Route::get('file-upload', FIleUpload::class)->name('file-upload');
     Route::get('dashboard', Apms::class)->name('dashboard');
+    Route::get('apms', Apms::class)->name('apms');
     Route::get('area-apms', AreaApms::class)->name('area-apms'); //Tambahkan routing ini
     Route::get('kriteria-apms', KriteriaApms::class)->name('kriteria-apms');
 });

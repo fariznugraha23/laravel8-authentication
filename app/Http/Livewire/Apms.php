@@ -12,8 +12,8 @@ class Apms extends Component
     public $isApm = 0;
     public function render()
     {
-        $this->apm = Apm::orderBy('id_apm', 'ASC')->get();
-        return view('dashboard');
+        // $this->apm = Apm::orderBy('id_apm', 'ASC')->get();
+        return view('dashboard',['apms'=> Apm::orderBy('id_apm', 'ASC')->paginate(10)]);
     }
     public function create()
     {
@@ -103,13 +103,28 @@ class Apms extends Component
 
         $this->openApm();
     }
-    public function upload($id_apm)
-    {
-        $apm = Apm::find($id_apm); 
-        $this->area = AreaApm::orderBy('id_area', 'ASC')->get();
-        $this->kriteria = KriteriaApm::orderBy('id_kriteria', 'ASC')->get();
-        return view('dashboard');
-    }
+    // public function upload($id_apm)
+    // {
+    //     $apm = Apm::find($id_apm); 
+    //     $this->area = AreaApm::orderBy('id_area', 'ASC')->get();
+    //     $this->kriteria = KriteriaApm::orderBy('id_kriteria', 'ASC')->get();
+
+    //     $this->id_apm = $id_apm;
+    //     $this->id_area = $apm->id_area;
+    //     $this->area_rb = $apm->area_rb;
+    //     $this->penilaian = $apm->penilaian;
+    //     $this->a = $apm->a;
+    //     $this->b = $apm->b;
+    //     $this->c = $apm->c;
+    //     $this->nilai = $apm->nilai;
+    //     $this->id_kriteria = $apm->id_kriteria;
+    //     $this->bobot = $apm->bobot;
+    //     $this->skor = $apm->skor;
+    //     $this->panduan_eviden = $apm->panduan_eviden;
+    //     $this->catatan_eviden = $apm->catatan_eviden;
+
+    //     $this->openApm();
+    // }
     public function delete($id_apm)
     {
         $apm = Apm::find($id_apm);

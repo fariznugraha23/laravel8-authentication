@@ -18,6 +18,14 @@
 
             <button wire:click="create()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3">Tambah Area</button>
             
+    
+            <input wire:model="search" type="text" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline " placeholder="search..." >
+            <select wire:model="paginate" name="" id="" class="shadow border rounded py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline " >
+                <option value="7"> 7</option>
+                <option value="2">2</option>
+                <option value="4">4</option>
+                <option value="6">6</option>                  
+            </select>
             @if($isArea)
                 @include('livewire.create')
             @endif
@@ -31,7 +39,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($area as $row)
+                    @forelse($areas as $row)
                         <tr>
                         <td class="border px-4 py-2"> <center>{{ $row->id_area }}</center></td>
                             <td class="border px-4 py-2">{{ $row->nama_area }}</td>
@@ -49,7 +57,8 @@
                     @endforelse
                 </tbody>
             </table>
-            
+            <br>
+            {{ $areas->links()}}
         </div>
     </div>
 </div>

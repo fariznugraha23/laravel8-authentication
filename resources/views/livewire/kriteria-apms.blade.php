@@ -31,7 +31,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($kriteria as $row)
+                    @forelse($kriterias as $row)
                         <tr>
                         <td class="border px-4 py-2"> <center>{{ $row->id_kriteria }}</center></td>
                             <td class="border px-4 py-2">{{ $row->nama_kriteria }}</td>
@@ -49,7 +49,7 @@
                     @endforelse
                 </tbody>
             </table>
-            
+            {{ $kriterias->links()}}
         </div>
     </div>
 </div>

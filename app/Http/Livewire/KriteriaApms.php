@@ -4,15 +4,18 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\KriteriaApm;
+use Livewire\WithPagination;
 
 class KriteriaApms extends Component
 {
+    use WithPagination;
     public $kriteria, $nama_kriteria, $id_kriteria;
     public $isKriteria = 0;
     public function render()
     {
-        $this->kriteria = KriteriaApm::orderBy('id_kriteria', 'ASC')->get();
-        return view('livewire.kriteria-apms');
+        // $this->kriteria = KriteriaApm::orderBy('id_kriteria', 'ASC')->get();
+        // return view('livewire.kriteria-apms');
+        return view('livewire.kriteria-apms',['kriterias' => KriteriaApm::orderBy('id_kriteria', 'ASC')->paginate(7)]);
     }
     public function create()
     {
