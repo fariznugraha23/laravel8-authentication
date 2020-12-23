@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 use App\Models\Apm;
 use App\Models\AreaApm;
 use App\Models\KriteriaApm;
@@ -10,10 +11,23 @@ class Apms extends Component
 {
     public $apm, $id_apm, $kriteria,$area, $id_area, $area_rb, $penilaian, $a, $b, $c, $nilai, $id_kriteria, $bobot, $skor, $panduan_eviden, $catatan_eviden;
     public $isApm = 0;
+    use WithPagination;
+    public $paginate=300;
+    public $search;
+    protected $queryString = ['search'];
+    public function mount()
+    {
+        $this->search = request()->query('search', $this->search);
+    }
     public function render()
     {
         // $this->apm = Apm::orderBy('id_apm', 'ASC')->get();
-        return view('dashboard',['apms'=> Apm::orderBy('id_apm', 'ASC')->paginate(10)]);
+        // return view('dashboard',['apms'=> Apm::orderBy('id_apm', 'ASC')->paginate(10)]);
+        return view('dashboard',[
+            'apms' => $this->search === null ?
+            Apm::orderBy('id_apm', 'ASC')->paginate($this->paginate) :
+            Apm::orderBy('id_apm', 'ASC')->where('penilaian','like','%'.$this->search.'%')->paginate($this->paginate)]);
+    
     }
     public function create()
     {

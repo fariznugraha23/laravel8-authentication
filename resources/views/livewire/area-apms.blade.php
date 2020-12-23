@@ -21,10 +21,10 @@
     
             <input wire:model="search" type="text" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline " placeholder="search..." >
             <select wire:model="paginate" name="" id="" class="shadow border rounded py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline " >
-                <option value="7"> 7</option>
-                <option value="2">2</option>
-                <option value="4">4</option>
-                <option value="6">6</option>                  
+                <option value="100">All</option>
+                <option value="5">5</option>
+                <option value="7">7</option>
+                <option value="10">10</option>                  
             </select>
             @if($isArea)
                 @include('livewire.create')
