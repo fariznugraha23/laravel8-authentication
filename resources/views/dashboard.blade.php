@@ -18,7 +18,15 @@
                 @endif
 
                 <button wire:click="create()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3">Tambah Data</button>
-                
+                <input wire:model="search" type="text" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline " placeholder="search..." >
+                <select wire:model="paginate" name="" id="" class="shadow border rounded py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline " >
+                    <option value="300">All</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="10">25</option>
+                    <option value="15">50</option>                  
+                </select>
                 @if($isApm)
                     @include('livewire.create-dashboard')
                 @endif
@@ -59,14 +67,14 @@
                                 <td class="border px-4 py-2">
                                 <center>
                                 <!-- <button wire:click="upload({{ $row->id_apm }})" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Detail</button><br> -->
-                                <button href="{{ Route('file-upload') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Detail</button><br>
+                                <a href="{{ Route('file-upload', $row->id_apm) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Detail</a><br>
                                     <button wire:click="edit({{ $row->id_apm }})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded">Edit</button> <br>
                                     <button wire:click="delete({{ $row->id_apm }})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Hapus</button></center>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td class="border px-4 py-2 text-center" colspan="9">Tidak ada data</td>
+                                <td class="border px-4 py-2 text-center" colspan="11">Tidak ada data</td>
                             </tr>
                         @endforelse
                     </tbody>

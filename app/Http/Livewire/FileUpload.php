@@ -10,15 +10,22 @@ use App\Models\File;
 class FileUpload extends Component
 {
     use WithFileUploads;
-    public $file, $title;
+    public $file, $title, $postId, $id_apm;
     /**
      * Write code on Method
      *
      * @return response()
      */
+    public function mount($id_apm){
+        $apm = Apm::find($id_apm);
+        if($apm){
+            $this->postId=$apm->id_apm;
+        }
+    }
     public function submit()
     {
         $validatedData = $this->validate([
+            'id_apm' => 'required',
             'title' => 'required',
             'file' => 'required',
         ]);
@@ -31,22 +38,10 @@ class FileUpload extends Component
      *
      * @return response()
      */
-    public function render($id_apm)
+    public function render()
     {
-        $apm = Apm::find($id_apm);
-        $this->id_apm = $id_apm;
-        $this->id_area = $apm->id_area;
-        $this->area_rb = $apm->area_rb;
-        $this->penilaian = $apm->penilaian;
-        $this->a = $apm->a;
-        $this->b = $apm->b;
-        $this->c = $apm->c;
-        $this->nilai = $apm->nilai;
-        $this->id_kriteria = $apm->id_kriteria;
-        $this->bobot = $apm->bobot;
-        $this->skor = $apm->skor;
-        $this->panduan_eviden = $apm->panduan_eviden;
-        $this->catatan_eviden = $apm->catatan_eviden;
+        // $apm = Apm::find($id_apm);
+        
         return view('livewire.file-upload');
     }
 }

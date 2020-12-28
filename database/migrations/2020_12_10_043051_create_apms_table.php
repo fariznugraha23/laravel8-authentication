@@ -14,7 +14,7 @@ class CreateApmsTable extends Migration
     public function up()
     {
         Schema::create('apms', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id_apm');
             $table->integer('id_area');
             $table->integer('area_rb');
             $table->string('penilaian', 1000);
