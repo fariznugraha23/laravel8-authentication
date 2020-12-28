@@ -17,11 +17,9 @@ class KriteriaApms extends Component
     public function mount()
     {
         $this->search = request()->query('search', $this->search);
-<<<<<<< HEAD
-    }
-=======
+
     }  
->>>>>>> 7e3e7a9fca2b42ad24c9a666679462be9260e61c
+
     public function render()
     {
         // $this->kriteria = KriteriaApm::orderBy('id_kriteria', 'ASC')->get();
