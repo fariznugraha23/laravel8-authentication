@@ -11,11 +11,22 @@ class KriteriaApms extends Component
     use WithPagination;
     public $kriteria, $nama_kriteria, $id_kriteria;
     public $isKriteria = 0;
+    public $paginate=7;
+    public $search;
+    protected $queryString = ['search'];
+    public function mount()
+    {
+        $this->search = request()->query('search', $this->search);
+    }
     public function render()
     {
         // $this->kriteria = KriteriaApm::orderBy('id_kriteria', 'ASC')->get();
         // return view('livewire.kriteria-apms');
-        return view('livewire.kriteria-apms',['kriterias' => KriteriaApm::orderBy('id_kriteria', 'ASC')->paginate(7)]);
+        // return view('livewire.kriteria-apms',['kriterias' => KriteriaApm::orderBy('id_kriteria', 'ASC')->paginate(7)]);
+        return view('livewire.kriteria-apms',[
+            'kriterias' => $this->search === null ?
+            KriteriaApm::orderBy('id_kriteria', 'ASC')->paginate($this->paginate) :
+            KriteriaApm::orderBy('id_kriteria', 'ASC')->where('nama_kriteria','like','%'.$this->search.'%')->paginate($this->paginate)]);
     }
     public function create()
     {
