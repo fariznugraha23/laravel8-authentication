@@ -39,13 +39,13 @@
                             <th class="px-4 py-2 w-60">Penilaian</th>
                             <th class="px-4 py-2 w-60">A</th>
                             <th class="px-4 py-2 w-60">B</th>
-                            <th class="px-4 py-2 w-50">C</th>
+                            <th class="px-4 py-2 w-20">C</th>
                             <th class="w-10">Nilai</th>
                             <th class="px-4 py-2 w-20">Kriteria</th>
                             <!-- <th class="px-4 py-2">Bobot</th>
                             <th class="px-4 py-2">Skor</th> -->
-                            <th class="px-4 py-2">Panduan Eviden</th>
-                            <th class="px-4 py-2">Catatan Eviden</th>
+                            <th class="px-4 py-2 w-20">Panduan Eviden</th>
+                            <th class="px-4 py-2 w-20">Catatan Eviden</th>
                             <th class="px-4 py-2 w-20">Action</th>
                         </tr>
                     </thead>
@@ -79,6 +79,7 @@
                         @endforelse
                     </tbody>
                 </table>
+                <br>
                 {{ $apms->links()}}
             </div>
         </div>

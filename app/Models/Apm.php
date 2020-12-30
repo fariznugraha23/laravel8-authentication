@@ -22,4 +22,8 @@ class Apm extends Model
     {
         return $this->belongsTo('App\Models\KriteriaApm', 'id_kriteria','id_kriteria');
     }
+    public function file()
+    {
+        return $this->belongsTo('App\Models\File', 'id_apm','id_apm');
+    }
 }

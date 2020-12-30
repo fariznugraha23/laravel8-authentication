@@ -6,28 +6,57 @@
 <div class="py-12">
     <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
-    <form wire:submit.prevent="submit" enctype="multipart/form-data">
-        <div>
-            @if(session()->has('message'))
-                <div class="alert alert-success">
-                    {{ session('message') }}
+            <form wire:submit.prevent="submit" enctype="multipart/form-data">
+                <div>
+                    @if(session()->has('message'))
+                        <div class="alert alert-success">
+                            {{ session('message') }}
+                        </div>
+                    @endif
                 </div>
-            @endif
+                <input type="hidden" wire:model="postId">
+                <input type="hidden" wire:model="id_apm" value="{{$postId}}">
+                <div class="form-group">
+                    <label for="exampleInputName">Title:</label>
+                    <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="exampleInputName" placeholder="" wire:model="title">
+                    @error('title') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName">File:</label>
+                    <input type="file" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="exampleInputName" wire:model="file">
+                    @error('name') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3">Save</button>
+            </form>
+            <?php
+
+            ?>
+            <table class="table-fixed w-full">
+                <thead>
+                    <tr class="bg-gray-100">
+                        <th class="px-4 py-2" width="40%">Title</th>
+                        <th class="px-4 py-2" width="40%">Download</th>
+                        <th class="px-4 py-2" width="20%">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @forelse($files as $user)
+                   <tr>
+                        <td class="border px-4 py-2">{{ $user->title }}</td>
+                        <td class="border px-4 py-2">{{ $user->title }} </td>
+                        <td class="border px-4 py-2"> <a href="{{ Storage::url('app/public/'.$user->name) }}" download>Download</a></td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td class="border px-4 py-2 text-center" colspan="3">Tidak ada data</td>
+                    </tr>
+                    @endforelse
+                   
+                </tbody>
+            </table>
         </div>
-        <input type="hidden" wire:model="postId">
-        <input type="hidden" wire:model="id_apm" value="{{$postId}}">
-        <div class="form-group">
-            <label for="exampleInputName">Title:</label>
-            <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="exampleInputName" placeholder="" wire:model="title">
-            @error('title') <span class="text-danger">{{ $message }}</span> @enderror
-        </div>
-        <div class="form-group">
-            <label for="exampleInputName">File:</label>
-            <input type="file" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="exampleInputName" wire:model="file">
-            @error('name') <span class="text-danger">{{ $message }}</span> @enderror
-        </div>
-        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3">Save</button>
-    </form>
-    </div>
     </div>
 </div>
+
+
+

@@ -6,7 +6,7 @@ use App\Models\Apm;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\File;
-
+use Illuminate\Support\Facades\Storage;
 class FileUpload extends Component
 {
     use WithFileUploads;
@@ -40,8 +40,13 @@ class FileUpload extends Component
      */
     public function render()
     {
-        // $apm = Apm::find($id_apm);
-        
-        return view('livewire.file-upload');
+        return view('livewire.file-upload', [
+            'files' => File::where('id_apm', $this->postId)->get(),
+        ]);
     }
+    public function download($name)
+    {
+        return Storage::disk('local')->download($name);
+    } 
+
 }

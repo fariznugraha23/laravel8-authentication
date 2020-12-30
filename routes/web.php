@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Apms;
 use App\Http\Livewire\AreaApms;
 use App\Http\Livewire\KriteriaApms;
-use App\Http\Livewire\FIleUpload;
+use App\Http\Livewire\FileUpload;
 
 /*
 |--------------------------------------------------------------------------
