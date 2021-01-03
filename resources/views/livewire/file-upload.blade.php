@@ -35,16 +35,20 @@
                 <thead>
                     <tr class="bg-gray-100">
                         <th class="px-4 py-2" width="40%">Title</th>
-                        <th class="px-4 py-2" width="40%">Download</th>
-                        <th class="px-4 py-2" width="20%">Action</th>
+                        <th class="px-4 py-2" width="30%">Download</th>
+                        <th class="px-4 py-2" width="30%">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                 @forelse($files as $user)
                    <tr>
-                        <td class="border px-4 py-2">{{ $user->title }}</td>
-                        <td class="border px-4 py-2">{{ $user->title }} </td>
-                        <td class="border px-4 py-2"> <a href="{{ Storage::url('app/public/'.$user->name) }}" download>Download</a></td>
+                        <td class="border px-4 py-2"><center>{{ $user->title }}</center></td>
+                        <td class="border px-4 py-2"><center><a  class="bg-green-500 hover:bg-greenS-700 text-white font-bold py-2 px-4 rounded my-3" href="{{ Storage::url('public/'.$user->name) }}" download>Download</a> </center></td>
+                        <td class="border px-4 py-2"><center>  
+                        <!-- <button wire:click="edit({{ $user->id_file }})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded">Edit</button> -->
+                        <button wire:click="delete({{ $user->id_file }})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Hapus</button></center>
+                        </center> </td>
+                        
                     </tr>
                     @empty
                     <tr>

@@ -44,9 +44,15 @@ class FileUpload extends Component
             'files' => File::where('id_apm', $this->postId)->get(),
         ]);
     }
-    public function download($name)
+    // public function download($name)
+    // {
+    //     return Storage::disk('local')->download($name);
+    // } 
+    public function delete($id_file)
     {
-        return Storage::disk('local')->download($name);
-    } 
+        $data = File::find($id_file);
+        $data->delete(); 
+        session()->flash('message', 'Data Dihapus');
+    }
 
 }
