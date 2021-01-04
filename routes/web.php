@@ -17,16 +17,16 @@ use App\Http\Livewire\FileUpload;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     // Route::get('/dashboard', function() {
     //     return view('dashboard');
     // })->name('dashboard');
     Route::get('file-upload/{id_apm}', FileUpload::class)->name('file-upload');
-    Route::get('dashboard', Apms::class)->name('dashboard');
+    Route::get('/', Apms::class)->name('dashboard');
     Route::get('apms', Apms::class)->name('apms');
     Route::get('area-apms', AreaApms::class)->name('area-apms'); //Tambahkan routing ini
     Route::get('kriteria-apms', KriteriaApms::class)->name('kriteria-apms');
