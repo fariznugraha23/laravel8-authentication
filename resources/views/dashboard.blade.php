@@ -18,14 +18,14 @@
                 @endif
 
                 <button wire:click="create()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3">Tambah Data</button>
-                <input wire:model="search" type="text" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline " placeholder="search..." >
+                <input wire:model="search" type="text" class="shadow appearance-none border rounded py-2 px-6 text-gray-700 leading-tight focus:outline-none focus:shadow-outline " placeholder="search penilaian..." >
                 <select wire:model="paginate" name="" id="" class="shadow border rounded py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline " >
                     <option value="300">All</option>
                     <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="15">15</option>
-                    <option value="10">25</option>
-                    <option value="15">50</option>                  
+                    <option value="25">25</option>
+                    <option value="50">50</option>                  
                 </select>
                 @if($isApm)
                     @include('livewire.create-dashboard')

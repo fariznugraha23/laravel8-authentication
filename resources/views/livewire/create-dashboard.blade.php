@@ -44,7 +44,8 @@
                     <div class="">
                         <div class="mb-4">
                             <label for="formName" class="block text-gray-700 text-sm font-bold mb-2">Penilaian:</label>
-                            <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="formName" wire:model="penilaian">
+                            <textarea id="formName" wire:model="penilaian" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"> </textarea>
+                            <!-- <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="formName" wire:model="penilaian"> -->
                             @error('penilaian') <span class="text-red-500">{{ $message }}</span>@enderror
                         </div>
                     </div>
@@ -53,7 +54,8 @@
                     <div class="">
                         <div class="mb-4">
                             <label for="formName" class="block text-gray-700 text-sm font-bold mb-2">A:</label>
-                            <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="formName" wire:model="a">
+                            <!-- <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="formName" wire:model="a"> -->
+                            <textarea id="formName" wire:model="a" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"> </textarea>
                             @error('a') <span class="text-red-500">{{ $message }}</span>@enderror
                         </div>
                     </div>
@@ -62,7 +64,8 @@
                     <div class="">
                         <div class="mb-4">
                             <label for="formName" class="block text-gray-700 text-sm font-bold mb-2">B:</label>
-                            <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="formName" wire:model="b">
+                            <!-- <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="formName" wire:model="b"> -->
+                            <textarea id="formName" wire:model="b" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"> </textarea>
                             @error('b') <span class="text-red-500">{{ $message }}</span>@enderror
                         </div>
                     </div>
@@ -71,7 +74,8 @@
                     <div class="">
                         <div class="mb-4">
                             <label for="formName" class="block text-gray-700 text-sm font-bold mb-2">C:</label>
-                            <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="formName" wire:model="c">
+                            <textarea id="formName" wire:model="c" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"> </textarea>
+                            <!-- <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="formName" wire:model="c"> -->
                             @error('c') <span class="text-red-500">{{ $message }}</span>@enderror
                         </div>
                     </div>
@@ -87,7 +91,7 @@
                                 <option value="B">B</option>
                                 <option value="C">C</option>   
                             </select>
-                            @error('nilai') <span class="text-red-500">{{ $message }}</span>@enderror
+                            <!-- @error('nilai') <span class="text-red-500">{{ $message }}</span>@enderror -->
                         </div>
                     </div>
                 </div>
@@ -137,7 +141,7 @@
                         <div class="mb-4">
                             <label for="formName" class="block text-gray-700 text-sm font-bold mb-2">Skor:</label>
                             <input type="number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="formName" wire:model="skor">
-                            @error('skor') <span class="text-red-500">{{ $message }}</span>@enderror
+                            <!-- @error('skor') <span class="text-red-500">{{ $message }}</span>@enderror -->
                         </div>
                     </div>
                 </div>
@@ -146,7 +150,7 @@
                         <div class="mb-4">
                             <label for="formName" class="block text-gray-700 text-sm font-bold mb-2">Panduan Eviden:</label>
                             <textarea id="formName" wire:model="panduan_eviden" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"> </textarea>  
-                            @error('panduan_eviden') <span class="text-red-500">{{ $message }}</span>@enderror
+                            <!-- @error('panduan_eviden') <span class="text-red-500">{{ $message }}</span>@enderror -->
                         </div>
                     </div>
                 </div>
@@ -155,7 +159,7 @@
                         <div class="mb-4">
                             <label for="formName" class="block text-gray-700 text-sm font-bold mb-2">Catatan Eviden:</label>
                             <textarea id="formName" wire:model="catatan_eviden" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"> </textarea>
-                            @error('catatan_eviden') <span class="text-red-500">{{ $message }}</span>@enderror
+                            <!-- @error('catatan_eviden') <span class="text-red-500">{{ $message }}</span>@enderror -->
                         </div>
                     </div>
                 </div>
