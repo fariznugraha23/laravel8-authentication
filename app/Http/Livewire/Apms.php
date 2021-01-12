@@ -7,6 +7,7 @@ use Livewire\WithPagination;
 use App\Models\Apm;
 use App\Models\AreaApm;
 use App\Models\KriteriaApm;
+use DB;
 class Apms extends Component
 {
     public $apm, $id_apm, $kriteria,$area, $id_area, $area_rb, $penilaian, $a, $b, $c, $nilai, $id_kriteria, $bobot, $skor, $panduan_eviden, $catatan_eviden;
@@ -23,10 +24,13 @@ class Apms extends Component
     {
         // $this->apm = Apm::orderBy('id_apm', 'ASC')->get();
         // return view('dashboard',['apms'=> Apm::orderBy('id_apm', 'ASC')->paginate(10)]);
+        $count = DB::table('apms')->sum('bobot');
         return view('dashboard',[
             'apms' => $this->search === null ?
             Apm::orderBy('id_apm', 'ASC')->paginate($this->paginate) :
-            Apm::orderBy('id_apm', 'ASC')->where('penilaian','like','%'.$this->search.'%')->paginate($this->paginate)]);
+            Apm::orderBy('id_apm', 'ASC')->where('penilaian','like','%'.$this->search.'%')->paginate($this->paginate),
+            'count'=> $count,
+            ]);
     
     }
     public function create()

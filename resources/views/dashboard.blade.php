@@ -16,7 +16,7 @@
                         </div>
                     </div>
                 @endif
-
+                {{$count}}
                 <button wire:click="create()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3">Tambah Data</button>
                 <input wire:model="search" type="text" class="shadow appearance-none border rounded py-2 px-6 text-gray-700 leading-tight focus:outline-none focus:shadow-outline " placeholder="search penilaian..." >
                 <select wire:model="paginate" name="" id="" class="shadow border rounded py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline " >
