@@ -24,12 +24,14 @@ class Apms extends Component
     {
         // $this->apm = Apm::orderBy('id_apm', 'ASC')->get();
         // return view('dashboard',['apms'=> Apm::orderBy('id_apm', 'ASC')->paginate(10)]);
-        $count = DB::table('apms')->sum('bobot');
+        $count = DB::table('apms')->sum('skor');
+        $skor = DB::table('apms')->sum('bobot');
         return view('dashboard',[
             'apms' => $this->search === null ?
             Apm::orderBy('id_apm', 'ASC')->paginate($this->paginate) :
             Apm::orderBy('id_apm', 'ASC')->where('penilaian','like','%'.$this->search.'%')->paginate($this->paginate),
             'count'=> $count,
+            'skor'=> $skor,
             ]);
     
     }
@@ -73,10 +75,10 @@ class Apms extends Component
             'a' => 'required|string',
             'b' => 'required|string',
             'c' => 'required|string',
-            'nilai' => 'required',
+            'nilai' => 'string',
             'id_kriteria' => 'required|integer',
             'bobot' => 'required|integer',
-            'skor' => 'required|integer',
+            'skor' => 'string',
             'panduan_eviden' => 'required',
             'catatan_eviden' => 'required'
         ]);

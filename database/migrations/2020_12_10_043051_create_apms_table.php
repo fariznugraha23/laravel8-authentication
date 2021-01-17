@@ -24,7 +24,7 @@ class CreateApmsTable extends Migration
             $table->char('nilai',11);
             $table->integer('id_kriteria');
             $table->integer('bobot');
-            $table->integer('skor');
+            $table->string('skor',100);
             $table->string('panduan_eviden',1000);
             $table->text('catatan_eviden');
         });

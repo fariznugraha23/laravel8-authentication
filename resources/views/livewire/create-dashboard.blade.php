@@ -140,7 +140,7 @@
                     <div class="">
                         <div class="mb-4">
                             <label for="formName" class="block text-gray-700 text-sm font-bold mb-2">Skor:</label>
-                            <input type="number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="formName" wire:model="skor">
+                            <input type="number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="1" id="formName" wire:model="skor">
                             <!-- @error('skor') <span class="text-red-500">{{ $message }}</span>@enderror -->
                         </div>
                     </div>

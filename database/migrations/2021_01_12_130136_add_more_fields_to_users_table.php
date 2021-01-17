@@ -15,7 +15,7 @@ class AddMoreFieldsToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
            
-            //
+            // $table->integer('level');
             
         });
     }
