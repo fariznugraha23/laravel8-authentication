@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Apms;
+use App\Http\Livewire\ApmUser;
 use App\Http\Livewire\AreaApms;
 use App\Http\Livewire\KriteriaApms;
 use App\Http\Livewire\FileUpload;
@@ -21,7 +22,7 @@ use App\Http\Livewire\FileUpload;
 //     return view('welcome');
 // });
 
-Route::group(['middleware' => ['auth:sanctum', 'admin']], function() {
+Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     // Route::get('/dashboard', function() {
     //     return view('dashboard');
     // })->name('dashboard');
@@ -31,8 +32,10 @@ Route::group(['middleware' => ['auth:sanctum', 'admin']], function() {
     Route::get('area-apms', AreaApms::class)->name('area-apms'); //Tambahkan routing ini
     Route::get('kriteria-apms', KriteriaApms::class)->name('kriteria-apms');
 });
-Route::group(['middleware' => ['auth:sanctum', 'user']], function() {
-Route::get('/', function () {
-    return view('welcome');
-});
-});
+// Route::group(['middleware' => ['auth:sanctum', 'user']], function() {
+//     Route::get('home', ApmUser::class)->name('apm-user');
+// //     Route::get('/', function () {
+// //     return view('welcome');
+// // });
+
+// });

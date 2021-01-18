@@ -18,11 +18,7 @@
                 @endif
                 <table class="table-auto">
                     <tr>
-                        <td>
-                            @if(auth()->user()->level<3)
-                            <button wire:click="create()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3">Tambah Data</button>
-                            @endif
-                        </td>
+                        <td><button wire:click="create()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3">Tambah Data</button></td>
                         <td> <input wire:model="search" type="text" class="shadow appearance-none border rounded py-2 px-6 text-gray-700 leading-tight focus:outline-none focus:shadow-outline " placeholder="search penilaian..." ></td>
                         <td> <select wire:model="paginate" name="" id="" class="shadow border rounded py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline " >
                                 <option value="300">All</option>
@@ -94,21 +90,10 @@
                                 <!-- <td class="border px-4 py-2">{{ $row->panduan_eviden }}</td>
                                 <td class="border px-4 py-2">{{ $row->catatan_eviden }}</td> -->
                                 <td class="border px-4 py-2">
-                                @if(auth()->user()->level==1)
-                                    <center>
-                                        <!-- <button wire:click="upload({{ $row->id_apm }})" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Detail</button><br> -->
-                                        <a href="{{ Route('file-upload', $row->id_apm) }}"><button  class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Eviden</button></a><br>
-                                            <button wire:click="edit({{ $row->id_apm }})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded">Edit</button> <br>
-                                            <button wire:click="delete({{ $row->id_apm }})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Hapus</button></center>
-                                @elseif(auth()->user()->level==2)
-                                    <center>
-                                    <!-- <button wire:click="upload({{ $row->id_apm }})" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Detail</button><br> -->
-                                    <a href="{{ Route('file-upload', $row->id_apm) }}"><button  class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Eviden</button></a><br>
-                                        <button wire:click="edit({{ $row->id_apm }})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded">Edit</button> <br>
-                                @else
-                                    <a href="{{ Route('file-upload', $row->id_apm) }}"><button  class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Eviden</button></a>
-                                @endif
-                                
+                                <center>
+                                <!-- <button wire:click="upload({{ $row->id_apm }})" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Detail</button><br> -->
+                                <a href="{{ Route('file-upload', $row->id_apm) }}"><button  class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Eviden</button></a><br>
+                                    <button wire:click="edit({{ $row->id_apm }})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded">Edit</button> <br>
                                 </td>
                             </tr>
                         @empty

@@ -1,11 +1,14 @@
 <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        Kriteria APM
+        Eviden APM
     </h2>
 </x-slot>
 <div class="py-12">
     <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
+            @if(auth()->user()->level==3)
+            <!-- isi -->
+            @else
             <form wire:submit.prevent="submit" enctype="multipart/form-data">
                 <div>
                     @if(session()->has('message'))
@@ -28,9 +31,7 @@
                 </div>
                 <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-3">Save</button>
             </form>
-            <?php
-
-            ?>
+            @endif
             <table class="table-fixed w-full">
                 <thead>
                     <tr class="bg-gray-100">

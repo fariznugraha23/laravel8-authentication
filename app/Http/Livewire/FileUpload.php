@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Storage;
 class FileUpload extends Component
 {
     use WithFileUploads;
-    public $file, $title, $postId, $id_apm;
+    public $file, $title, $postId, $id_apm, $nilai;
+    public $isArea = 0;
     /**
      * Write code on Method
      *
@@ -54,5 +55,6 @@ class FileUpload extends Component
         $data->delete(); 
         session()->flash('message', 'Data Dihapus');
     }
+
 
 }
