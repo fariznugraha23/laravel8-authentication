@@ -11,7 +11,7 @@ class FileUpload extends Component
 {
     use WithFileUploads;
     public $file, $title, $postId, $id_apm, $nilai;
-    public $isArea = 0;
+    public $isNilai = 0;
     /**
      * Write code on Method
      *
@@ -43,6 +43,7 @@ class FileUpload extends Component
     {
         return view('livewire.file-upload', [
             'files' => File::where('id_apm', $this->postId)->get(),
+            'apm' => Apm::where('id_apm', $this->postId)->get(),
         ]);
     }
     // public function download($name)
@@ -55,6 +56,41 @@ class FileUpload extends Component
         $data->delete(); 
         session()->flash('message', 'Data Dihapus');
     }
-
+    public function create()
+    {
+        $this->resetFields();
+        $this->openNilai();
+    }
+    public function closeNilai()
+    {
+        $this->isNilai = false;
+    }
+    public function openNilai()
+    {
+        $this->isNilai = true;
+    }
+    public function resetFields()
+    {
+        $this->nilai = '';  
+    }
+    public function store()
+    {
+        $this->validate([
+            'nilai' => 'required|string'
+        ]);
+        Apm::updateOrCreate(['id_apm' => $this->id_apm], [
+            'nilai' => $this->nilai,
+        ]);
+        session()->flash('message', $this->id_apm ?  'Nilai Diperbaharui':  'Nilai Ditambahkan');
+        $this->closeNilai(); 
+        $this->resetFields();
+    }
+    public function edit($postId)
+    {
+        $apm = Apm::find($postId);
+        $this->id_apm = $postId;
+        $this->nilai = $apm->nilai;
+        $this->openNilai();
+    }
 
 }

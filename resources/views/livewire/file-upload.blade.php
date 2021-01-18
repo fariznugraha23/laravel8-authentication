@@ -6,8 +6,23 @@
 <div class="py-12">
     <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
+            
+            <a href="{{ route('dashboard') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded "> < Back</a>
             @if(auth()->user()->level==3)
-            <!-- isi -->
+            <button wire:click="edit({{$postId}})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> Nilai</button>
+                @if($isNilai)
+                    @include('livewire.create-nilai')
+                @endif
+                @if (session()->has('message'))
+                    <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3" role="alert">
+                        <div class="flex">
+                            <div>
+                                <p class="text-sm">{{ session('message') }}</p>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
             @else
             <form wire:submit.prevent="submit" enctype="multipart/form-data">
                 <div>
