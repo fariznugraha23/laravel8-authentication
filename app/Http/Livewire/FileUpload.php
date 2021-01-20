@@ -76,10 +76,12 @@ class FileUpload extends Component
     public function store()
     {
         $this->validate([
-            'nilai' => 'required|string'
+            'nilai' => 'required|string',
+            'skor' => 'string'
         ]);
         Apm::updateOrCreate(['id_apm' => $this->id_apm], [
             'nilai' => $this->nilai,
+            'skor' => $this->skor,
         ]);
         session()->flash('message', $this->id_apm ?  'Nilai Diperbaharui':  'Nilai Ditambahkan');
         $this->closeNilai(); 
@@ -90,6 +92,7 @@ class FileUpload extends Component
         $apm = Apm::find($postId);
         $this->id_apm = $postId;
         $this->nilai = $apm->nilai;
+        $this->skor = $apm->skor;
         $this->openNilai();
     }
 
