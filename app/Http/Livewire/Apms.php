@@ -103,7 +103,12 @@ class Apms extends Component
     }
     public function edit($id_apm)
     {
-        $apm = Apm::find($id_apm); 
+        try {
+            $idz = Crypt::decryptString($id_apm);
+          } catch (DecryptException $e) {
+            abort('404');
+          }
+        $apm = Apm::find($idz); 
         $this->area = AreaApm::orderBy('id_area', 'ASC')->get();
         $this->kriteria = KriteriaApm::orderBy('id_kriteria', 'ASC')->get();
        
@@ -147,7 +152,13 @@ class Apms extends Component
     // }
     public function delete($id_apm)
     {
-        $apm = Apm::find($id_apm);
+        try {
+            $idz = Crypt::decryptString($id_apm);
+          } catch (DecryptException $e) {
+            abort('404');
+          }
+        
+        $apm = Apm::find($idz);
         $apm->delete(); 
         session()->flash('message', 'Data Dihapus');
     }

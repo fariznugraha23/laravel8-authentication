@@ -7,10 +7,11 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\File;
 use Illuminate\Support\Facades\Storage;
+use Crypt;
 class FileUpload extends Component
 {
     use WithFileUploads;
-    public $file, $title, $postId, $id_apm, $nilai;
+    public $file, $title, $postId, $id_apm, $nilai,$skor;
     public $isNilai = 0;
     /**
      * Write code on Method
@@ -18,7 +19,12 @@ class FileUpload extends Component
      * @return response()
      */
     public function mount($id_apm){
-        $apm = Apm::find($id_apm);
+        try {
+            $idz = Crypt::decryptString($id_apm);
+          } catch (DecryptException $e) {
+            abort('404');
+          }
+        $apm = Apm::find($idz);
         if($apm){
             $this->postId=$apm->id_apm;
         }

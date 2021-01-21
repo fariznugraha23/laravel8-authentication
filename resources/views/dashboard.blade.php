@@ -97,16 +97,17 @@
                                 @if(auth()->user()->level==1)
                                     <center>
                                         <!-- <button wire:click="upload({{ $row->id_apm }})" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Detail</button><br> -->
-                                        <a href="{{ Route('file-upload', $row->id_apm) }}"><button  class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Eviden</button></a><br>
-                                            <button wire:click="edit({{ $row->id_apm }})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded">Edit</button> <br>
-                                            <button wire:click="delete({{ $row->id_apm }})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Hapus</button></center>
+                                       
+                                        <a href="{{ Route('file-upload', Crypt::encryptString($row->id_apm)) }}"><button  class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Eviden</button></a><br>
+                                            <button wire:click="edit({{ Crypt::encryptString($row->id_apm) }})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded">Edit</button> <br>
+                                            <button wire:click="delete({{ Crypt::encryptString($row->id_apm) }})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Hapus</button></center>
                                 @elseif(auth()->user()->level==2)
                                     <center>
                                     <!-- <button wire:click="upload({{ $row->id_apm }})" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Detail</button><br> -->
-                                    <a href="{{ Route('file-upload', $row->id_apm) }}"><button  class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Eviden</button></a><br>
-                                        <button wire:click="edit({{ $row->id_apm }})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded">Edit</button> <br>
+                                    <a href="{{ Route('file-upload', Crypt::encryptString($row->id_apm)) }}"><button  class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Eviden</button></a><br>
+                                        <button wire:click="edit({{ Crypt::encryptString($row->id_apm) }})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded">Edit</button> <br>
                                 @else
-                                    <a href="{{ Route('file-upload', $row->id_apm) }}"><button  class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Eviden</button></a>
+                                    <a href="{{ Route('file-upload', Crypt::encryptString($row->id_apm)) }}"><button  class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Eviden</button></a>
                                 @endif
                                 
                                 </td>
