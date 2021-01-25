@@ -8,6 +8,7 @@ use App\Models\Apm;
 use App\Models\AreaApm;
 use App\Models\KriteriaApm;
 use DB;
+use Crypt;
 class Apms extends Component
 {
     public $apm, $id_apm, $kriteria,$area, $id_area, $area_rb, $penilaian, $a, $b, $c, $nilai, $id_kriteria, $bobot, $skor, $panduan_eviden, $catatan_eviden;
@@ -103,12 +104,12 @@ class Apms extends Component
     }
     public function edit($id_apm)
     {
-        try {
-            $idz = Crypt::decryptString($id_apm);
-          } catch (DecryptException $e) {
-            abort('404');
-          }
-        $apm = Apm::find($idz); 
+        // try {
+        //     $idz = Crypt::decryptString($id_apm);
+        //   } catch (DecryptException $e) {
+        //     abort('404');
+        //   }
+        $apm = Apm::find($id_apm); 
         $this->area = AreaApm::orderBy('id_area', 'ASC')->get();
         $this->kriteria = KriteriaApm::orderBy('id_kriteria', 'ASC')->get();
        
@@ -128,37 +129,11 @@ class Apms extends Component
 
         $this->openApm();
     }
-    // public function upload($id_apm)
-    // {
-    //     $apm = Apm::find($id_apm); 
-    //     $this->area = AreaApm::orderBy('id_area', 'ASC')->get();
-    //     $this->kriteria = KriteriaApm::orderBy('id_kriteria', 'ASC')->get();
 
-    //     $this->id_apm = $id_apm;
-    //     $this->id_area = $apm->id_area;
-    //     $this->area_rb = $apm->area_rb;
-    //     $this->penilaian = $apm->penilaian;
-    //     $this->a = $apm->a;
-    //     $this->b = $apm->b;
-    //     $this->c = $apm->c;
-    //     $this->nilai = $apm->nilai;
-    //     $this->id_kriteria = $apm->id_kriteria;
-    //     $this->bobot = $apm->bobot;
-    //     $this->skor = $apm->skor;
-    //     $this->panduan_eviden = $apm->panduan_eviden;
-    //     $this->catatan_eviden = $apm->catatan_eviden;
-
-    //     $this->openApm();
-    // }
     public function delete($id_apm)
     {
-        try {
-            $idz = Crypt::decryptString($id_apm);
-          } catch (DecryptException $e) {
-            abort('404');
-          }
-        
-        $apm = Apm::find($idz);
+
+        $apm = Apm::find($id_apm);
         $apm->delete(); 
         session()->flash('message', 'Data Dihapus');
     }

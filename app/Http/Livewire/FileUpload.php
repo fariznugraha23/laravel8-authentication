@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 use App\Models\Apm;
-
+use DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\File;
@@ -11,20 +11,16 @@ use Crypt;
 class FileUpload extends Component
 {
     use WithFileUploads;
-    public $file, $title, $postId, $id_apm, $nilai,$skor;
+    public $file, $title, $postId, $id_apm, $nilai,$skor, $hasil, $bobot;
     public $isNilai = 0;
     /**
      * Write code on Method
      *
      * @return response()
      */
+
     public function mount($id_apm){
-        try {
-            $idz = Crypt::decryptString($id_apm);
-          } catch (DecryptException $e) {
-            abort('404');
-          }
-        $apm = Apm::find($idz);
+        $apm = Apm::find($id_apm);
         if($apm){
             $this->postId=$apm->id_apm;
         }
@@ -50,6 +46,7 @@ class FileUpload extends Component
         return view('livewire.file-upload', [
             'files' => File::where('id_apm', $this->postId)->get(),
             'apm' => Apm::where('id_apm', $this->postId)->get(),
+            'skor' => DB::table('apms')->where('id_apm', $this->postId)->get(),
         ]);
     }
     // public function download($name)
@@ -83,11 +80,17 @@ class FileUpload extends Component
     {
         $this->validate([
             'nilai' => 'required|string',
-            'skor' => 'string'
         ]);
+        if($this->nilai=='A'){
+            $hasil=($this->bobot)/1;
+        }elseif($this->nilai=='B'){
+            $hasil=($this->bobot)/2;
+        }elseif($this->nilai=='C'){
+            $hasil=NULL;
+        }
         Apm::updateOrCreate(['id_apm' => $this->id_apm], [
             'nilai' => $this->nilai,
-            'skor' => $this->skor,
+            'skor' => $hasil,
         ]);
         session()->flash('message', $this->id_apm ?  'Nilai Diperbaharui':  'Nilai Ditambahkan');
         $this->closeNilai(); 
@@ -98,7 +101,7 @@ class FileUpload extends Component
         $apm = Apm::find($postId);
         $this->id_apm = $postId;
         $this->nilai = $apm->nilai;
-        $this->skor = $apm->skor;
+        $this->bobot = $apm->bobot;
         $this->openNilai();
     }
 

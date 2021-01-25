@@ -18,12 +18,12 @@
                                 <option value="B">B</option>
                                 <option value="C">C</option>   
                             </select>
-                            <!-- <input type="text" name="skor" wire:model="skor"> -->
+                            <!-- <input type="hidden" name="bobot" wire:model="bobot"> -->
                         </div>
-                        <div class="mb-4">
+                        <!-- <div class="mb-4">
                             <label for="formName" class="block text-gray-700 text-sm font-bold mb-2">Skor:</label>
-                            <input type="text" name="skor" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="skor" wire:model="skor">
-                        </div>
+                            <input type="text" name="bobot" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="skor" wire:model="bobot">
+                        </div> -->
                     </div>
                 </div>
     
