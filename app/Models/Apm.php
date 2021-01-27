@@ -12,7 +12,7 @@ class Apm extends Model
     public $timestamps = false;
     protected $primaryKey = "id_apm";
     protected $fillable = [
-        'id_area', 'area_rb', 'penilaian', 'a', 'b', 'c', 'nilai', 'id_kriteria', 'bobot', 'skor', 'panduan_eviden', 'catatan_eviden'
+        'id_area', 'area_rb', 'penilaian', 'a', 'b', 'c', 'nilai', 'id_kriteria', 'bobot', 'skor', 'panduan_eviden', 'catatan_eviden','slug'
     ];
     public function area_apm()
     {

@@ -97,8 +97,9 @@ class Apms extends Component
             'skor' => $this->skor,
             'panduan_eviden' => $this->panduan_eviden,
             'catatan_eviden' => $this->catatan_eviden,
+            'slug' => $this->penilaian,
         ]);
-        session()->flash('message', $this->id ? 'Data Diperbaharui': 'Data Ditambahkan');
+        session()->flash('message', $this->id_apm ? 'Data Diperbaharui': 'Data Ditambahkan');
         $this->closeApm(); 
         $this->resetFields(); 
     }

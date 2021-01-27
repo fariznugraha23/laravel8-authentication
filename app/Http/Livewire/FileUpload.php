@@ -8,10 +8,11 @@ use Livewire\WithFileUploads;
 use App\Models\File;
 use Illuminate\Support\Facades\Storage;
 use Crypt;
+use Str;
 class FileUpload extends Component
 {
     use WithFileUploads;
-    public $file, $title, $postId, $id_apm, $nilai,$skor, $hasil, $bobot;
+    public $file, $title, $postId, $id_apm, $nilai,$skor, $hasil, $bobot,$penilaian, $slug;
     public $isNilai = 0;
     /**
      * Write code on Method
@@ -19,8 +20,9 @@ class FileUpload extends Component
      * @return response()
      */
 
-    public function mount($id_apm){
-        $apm = Apm::find($id_apm);
+    public function mount($slug){
+        $apm = Apm::where('slug',$slug)->first();
+        
         if($apm){
             $this->postId=$apm->id_apm;
         }
@@ -92,7 +94,13 @@ class FileUpload extends Component
             'nilai' => $this->nilai,
             'skor' => $hasil,
         ]);
-        session()->flash('message', $this->id_apm ?  'Nilai Diperbaharui':  'Nilai Ditambahkan');
+        //menambahkan slug
+        //$hasil = Str::slug($this->penilaian);
+        // Apm::updateOrCreate(['id_apm' => $this->id_apm], [
+        //         'bobot' => $this->bobot,
+        //         'slug' => $hasil,
+        //     ]);
+        session()->flash('message', $this->nilai ?  'Nilai Diperbaharui':  'Nilai Ditambahkan');
         $this->closeNilai(); 
         $this->resetFields();
     }
@@ -103,6 +111,12 @@ class FileUpload extends Component
         $this->nilai = $apm->nilai;
         $this->bobot = $apm->bobot;
         $this->openNilai();
+        // menambahkan slug
+        // $apm = Apm::find($postId);
+        // $this->id_apm = $postId;
+        // $this->penilaian = $apm->penilaian;
+        // $this->bobot = $apm->bobot;
+        // $this->openNilai();
     }
 
 }
