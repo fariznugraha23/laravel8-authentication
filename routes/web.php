@@ -28,14 +28,11 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     // })->name('dashboard');
     Route::get('file-upload/{slug}', FileUpload::class)->name('file-upload');
     Route::get('/', Apms::class)->name('dashboard');
-    Route::get('apms', Apms::class)->name('apms');
+    // Route::get('apms', Apms::class)->name('apms');
+    
+});
+Route::group(['middleware' => ['auth:sanctum', 'admin']], function() {
+    Route::get('apm-user', ApmUser::class)->name('apm-user');
     Route::get('area-apms', AreaApms::class)->name('area-apms'); //Tambahkan routing ini
     Route::get('kriteria-apms', KriteriaApms::class)->name('kriteria-apms');
 });
-// Route::group(['middleware' => ['auth:sanctum', 'user']], function() {
-//     Route::get('home', ApmUser::class)->name('apm-user');
-// //     Route::get('/', function () {
-// //     return view('welcome');
-// // });
-
-// });

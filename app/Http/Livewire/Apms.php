@@ -9,6 +9,7 @@ use App\Models\AreaApm;
 use App\Models\KriteriaApm;
 use DB;
 use Crypt;
+use Str;
 class Apms extends Component
 {
     public $apm, $id_apm, $kriteria,$area, $id_area, $area_rb, $penilaian, $a, $b, $c, $nilai, $id_kriteria, $bobot, $skor, $panduan_eviden, $catatan_eviden;
@@ -83,7 +84,7 @@ class Apms extends Component
             'panduan_eviden' => 'required',
             'catatan_eviden' => 'required'
         ]);
-        
+        $hasil = Str::slug($this->penilaian);
         Apm::updateOrCreate(['id_apm' => $this->id_apm], [
             'id_area' => $this->id_area,
             'area_rb' => $this->area_rb,
@@ -97,7 +98,7 @@ class Apms extends Component
             'skor' => $this->skor,
             'panduan_eviden' => $this->panduan_eviden,
             'catatan_eviden' => $this->catatan_eviden,
-            'slug' => $this->penilaian,
+            'slug' =>$hasil,
         ]);
         session()->flash('message', $this->id_apm ? 'Data Diperbaharui': 'Data Ditambahkan');
         $this->closeApm(); 

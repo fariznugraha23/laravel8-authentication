@@ -12,10 +12,10 @@
             @if(auth()->user()->level==3)
                 <button wire:click="edit({{$postId}})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> Nilai</button>
                     @forelse($apm as $skors)
-                        <button style="cursor: default;" class="bg-yellow-300 text-white font-bold py-2 px-4 rounded"> {{$skors->nilai}}  </button>
+                        <button style="cursor: default;" class="bg-yellow-300 text-white font-bold py-2 px-4 rounded"> @if(($skors->nilai)==null) 0 @else  {{$skors->nilai}} @endif </button>
                         <button style="cursor: default;" class="bg-yellow-300 text-white font-bold py-2 px-4 rounded"> @if(($skors->skor)==null) 0 @else  {{$skors->skor}} @endif </button>
                     @empty
-                        <button style="cursor: default;" class="bg-yellow-300 text-white font-bold py-2 px-4 rounded"> -  </button>
+                        <button style="cursor: default;" class="bg-yellow-300 text-white font-bold py-2 px-4 rounded"> 0  </button>
                         <button style="cursor: default;" class="bg-yellow-300 text-white font-bold py-2 px-4 rounded"> 0   </button>
                     @endforelse
                         @if($isNilai)

@@ -4,16 +4,13 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Models\Apm;
-use App\Models\AreaApm;
-use App\Models\KriteriaApm;
-use DB;
+use App\Models\User;
 class ApmUser extends Component
 {
-    public $apm, $id_apm, $kriteria,$area, $id_area, $area_rb, $penilaian, $a, $b, $c, $nilai, $id_kriteria, $bobot, $skor, $panduan_eviden, $catatan_eviden;
-    public $isApm = 0;
     use WithPagination;
-    public $paginate=300;
+    public $idz, $user, $name, $username, $email, $level,$password;
+    public $isUser = 0;
+    public $paginate=7;
     public $search;
     protected $queryString = ['search'];
     public function mount()
@@ -22,112 +19,85 @@ class ApmUser extends Component
     }
     public function render()
     {
-      
-        $count = DB::table('apms')->sum('skor');
-        $skor = DB::table('apms')->sum('bobot');
+        // $this->user = UserApm::orderBy('id_user', 'ASC')->paginate(5);
+        // return view('livewire.user-apms',['users' => UserApm::orderBy('id_user', 'ASC')->paginate($this->paginate)]);
         return view('livewire.apm-user',[
-            'apms' => $this->search === null ?
-            Apm::orderBy('id_apm', 'ASC')->paginate($this->paginate) :
-            Apm::orderBy('id_apm', 'ASC')->where('penilaian','like','%'.$this->search.'%')->paginate($this->paginate),
-            'count'=> $count,
-            'skor'=> $skor,
-            ]);
-    
+            'users' => $this->search === null ?
+            User::orderBy('id', 'ASC')->paginate($this->paginate) :
+            User::orderBy('id', 'ASC')->where('name','like','%'.$this->search.'%')->paginate($this->paginate)]);
     }
     public function create()
     {
+        //KEMUDIAN DI DALAMNYA KITA MENJALANKAN FUNGSI UNTUK MENGOSONGKAN FIELD
         $this->resetFields();
-        $this->openApm();
-        $this->area = AreaApm::orderBy('id_area', 'ASC')->get();
-        $this->kriteria = KriteriaApm::orderBy('id_kriteria', 'ASC')->get();
+        //DAN MEMBUKA AREA
+        $this->openUser();
     }
-    public function openApm()
+
+    //FUNGSI INI UNTUK MENUTUP User DIMANA VARIABLE ISAREA KITA SET JADI FALSE
+    public function closeUser()
     {
-        $this->isApm = true;
+        $this->isUser = false;
     }
-    public function closeApm()
+
+    //FUNGSI INI DIGUNAKAN UNTUK MEMBUKA AREA
+    public function openUser()
     {
-        $this->isApm = false;
+        $this->isUser = true;
     }
+
+    //FUNGSI INI UNTUK ME-RESET FIELD/KOLOM, SESUAIKAN FIELD APA SAJA YANG KAMU MILIKI
     public function resetFields()
     {
-        $this->id_area = '';
-        $this->area_rb = '';
-        $this->penilaian = '';
-        $this->a = '';
-        $this->b = '';
-        $this->c = '';
-        $this->nilai = '';
-        $this->id_kriteria = '';
-        $this->bobot = '';
-        $this->skor = '';
-        $this->panduan_eviden = '';
-        $this->catatan_eviden = '';
+        $this->name = '';
        
     }
+
+    //METHOD STORE AKAN MENG-HANDLE FUNGSI UNTUK MENYIMPAN / UPDATE DATA
     public function store()
     {
+        //MEMBUAT VALIDASI
         $this->validate([
-            'id_area' => 'required|integer',
-            'area_rb' => 'required|integer',
-            'penilaian' => 'required|string',
-            'a' => 'required|string',
-            'b' => 'required|string',
-            'c' => 'required|string',
-            'nilai' => 'string',
-            'id_kriteria' => 'required|integer',
-            'bobot' => 'required|integer',
-            'skor' => 'string',
-            'panduan_eviden' => 'required',
-            'catatan_eviden' => 'required'
+            'name' => 'required|string',
+            'username' => 'required|string',
+            'email' => 'required|string'
         ]);
-        
-        Apm::updateOrCreate(['id_apm' => $this->id_apm], [
-            'id_area' => $this->id_area,
-            'area_rb' => $this->area_rb,
-            'penilaian' => $this->penilaian,
-            'a' => $this->a,
-            'b' => $this->b,
-            'c' => $this->c,
-            'nilai' => $this->nilai,
-            'id_kriteria' => $this->id_kriteria,
-            'bobot' => $this->bobot,
-            'skor' => $this->skor,
-            'panduan_eviden' => $this->panduan_eviden,
-            'catatan_eviden' => $this->catatan_eviden,
+        $pass = $this->password;
+        //QUERY UNTUK MENYIMPAN / MEMPERBAHARUI DATA MENGGUNAKAN UPDATEORCREATE
+        //DIMANA ID MENJADI UNIQUE ID, JIKA IDNYA TERSEDIA, MAKA UPDATE DATANYA
+        //JIKA TIDAK, MAKA TAMBAHKAN DATA BARU
+        User::updateOrCreate(['id' => $this->idz], [
+            'name' => $this->name,
+            'username' => $this->username,
+            'email' => $this->email,
+            'password' => $pass,
         ]);
-        session()->flash('message', $this->id ? 'Data Diperbaharui': 'Data Ditambahkan');
-        $this->closeApm(); 
-        $this->resetFields(); 
-    }
-    public function edit($id_apm)
-    {
-        $apm = Apm::find($id_apm); 
-        $this->area = AreaApm::orderBy('id_area', 'ASC')->get();
-        $this->kriteria = KriteriaApm::orderBy('id_kriteria', 'ASC')->get();
-       
-        $this->id_apm = $id_apm;
-        $this->id_area = $apm->id_area;
-        $this->area_rb = $apm->area_rb;
-        $this->penilaian = $apm->penilaian;
-        $this->a = $apm->a;
-        $this->b = $apm->b;
-        $this->c = $apm->c;
-        $this->nilai = $apm->nilai;
-        $this->id_kriteria = $apm->id_kriteria;
-        $this->bobot = $apm->bobot;
-        $this->skor = $apm->skor;
-        $this->panduan_eviden = $apm->panduan_eviden;
-        $this->catatan_eviden = $apm->catatan_eviden;
 
-        $this->openApm();
+        //BUAT FLASH SESSION UNTUK MENAMPILKAN ALERT NOTIFIKASI
+        session()->flash('message', $this->id ? $this->name . ' Diperbaharui': $this->name . ' Ditambahkan');
+        $this->closeUser(); //TUTUP User
+        $this->resetFields(); //DAN BERSIHKAN FIELD
     }
-   
-    public function delete($id_apm)
+
+    //FUNGSI INI UNTUK MENGAMBIL DATA DARI DATABASE BERDASARKAN ID MEMBER
+    public function edit($id)
     {
-        $apm = Apm::find($id_apm);
-        $apm->delete(); 
-        session()->flash('message', 'Data Dihapus');
+        $user = User::find($id); //BUAT QUERY UTK PENGAMBILAN DATA
+        //LALU ASSIGN KE DALAM MASING-MASING PROPERTI DATANYA
+        $this->idz = $user->id;
+        $this->name = $user->name;
+        $this->username = $user->username;
+        $this->email = $user->email;
+        $this->password = $user->password;
+
+        $this->openUser(); //LALU BUKA User
+    }
+
+    //FUNGSI INI UNTUK MENGHAPUS DATA
+    public function delete($id)
+    {
+        $user = User::find($id); //BUAT QUERY UNTUK MENGAMBIL DATA BERDASARKAN ID
+        $user->delete(); //LALU HAPUS DATA
+        session()->flash('message', $user->name . ' Dihapus'); //DAN BUAT FLASH MESSAGE UNTUK NOTIFIKASI
     }
 }
-
