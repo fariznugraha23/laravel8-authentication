@@ -24,8 +24,7 @@
                     @if (session()->has('message'))
                         <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3" role="alert">
                             <div class="flex">
-                                <div>
-                                
+                                <div class="alert alert-success">
                                     <p class="text-sm">{{ session('message') }}</p>
                                 </div>
                             </div>
@@ -41,15 +40,18 @@
                     <button style="cursor: default;" class="bg-yellow-300 text-white font-bold py-2 px-4 rounded"> -  </button>
                     <button style="cursor: default;" class="bg-yellow-300 text-white font-bold py-2 px-4 rounded"> 0   </button>
                 @endforelse
-            <form wire:submit.prevent="submit" enctype="multipart/form-data">
-                <div>
-                    @if(session()->has('message'))
-                        <div class="alert alert-success">
-                        <br>
+                @if(session()->has('message'))
+                    <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3" role="alert">
+                        
+                            <div class="alert alert-success">
                             {{ session('message') }}
-                        </div>
+                            </div>
+                        
+                    </div>
+                        
                     @endif
-                </div>
+            <form wire:submit.prevent="submit" enctype="multipart/form-data">
+                
                 <input type="hidden" wire:model="postId">
                 <input type="hidden" wire:model="id_apm" value="{{$postId}}">
                 <div class="form-group">
@@ -71,7 +73,7 @@
                     <tr class="bg-gray-100">
                         <th class="px-4 py-2" width="40%">Title</th>
                         <th class="px-4 py-2" width="30%">Download</th>
-                        @if(auth()->user()->level<3)
+                        @if(auth()->user()->level!=3)
                         <th class="px-4 py-2" width="30%">Action</th>
                         @endif
                     </tr>

@@ -20,8 +20,8 @@ class FileUpload extends Component
      * @return response()
      */
 
-    public function mount($slug){
-        $apm = Apm::where('slug',$slug)->first();
+    public function mount($id_apm){
+        $apm = Apm::find($id_apm);
         
         if($apm){
             $this->postId=$apm->id_apm;
